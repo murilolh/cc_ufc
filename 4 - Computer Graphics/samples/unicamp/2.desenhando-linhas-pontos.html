@@ -1,0 +1,334 @@
+<html><head><title>Desenhando linhas e pontos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta content="MSHTML 6.00.2722.900" name="GENERATOR"><link title="Introdução à computação gráfica com OpenGL" href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html" rel="HOME"><link title="Compilando programas que utilizam OpenGL" href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas-dev.html" rel="PREVIOUS"><link title="Outros" programas="" relacionados="" href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-funcoes.html" rel="NEXT"></head><body text="#000000" bgcolor="#ffffff">
+<div class="NAVHEADER">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <th colspan="3" align="middle">Introdução à computação gráfica com 
+OpenGL</th></tr>
+  <tr>
+    <td valign="bottom" width="10%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas-dev.html">Prev</a></td>
+    <td valign="bottom" width="80%" align="middle"></td>
+    <td valign="bottom" width="10%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-funcoes.html">Next</a></td></tr></tbody></table>
+<hr width="100%" align="left">
+</div>
+<div class="CHAPTER">
+<h1><a name="DESENHANDO-LINHAS-PONTOS">Capítulo 2. Desenhando linhas e 
+pontos</a></h1>
+<div class="TOC">
+<dl>
+  <dt><b>Índice</b>
+  </dt><dt>2.1. <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html#AEN174">Descrição 
+  do programa <tt class="FILENAME">linha.c</tt></a>
+  </dt><dt>2.2. <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-funcoes.html">Descrição 
+de funções do programa <tt class="FILENAME">linha.c</tt></a>
+  </dt><dt>2.3. <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-outros.html">Outros programas relacionados</a></dt>
+  <dt>2.4. <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-exercicios.html">Exercícios</a></dt></dl></div>
+<p>O propósito desta lição é entender recursos fundamentais da biblioteca OpenGL 
+e da biblioteca auxiliar GLUT, tais como abrir uma janela, definir sistemas de 
+coordenadas, limpar a tela e especificar cores de desenho. Este propósito será 
+alcançado através da análise do programa <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/linha.c" target="_top"><tt class="FILENAME">linha.c</tt></a>, mostrado no <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html#EXAMPLE-LINHA">Exemplo 
+2-1</a>, cuja única funcionalidade desenhar uma reta entre dois pontos de uma 
+janela gráfica. </p>
+<div class="EXAMPLE">
+<p><b><a name="EXAMPLE-LINHA">Exemplo 2-1. programa </a><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/linha.c" target="_top"><tt class="FILENAME">linha.c</tt></a></b></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">#include &lt;GL/glut.h&gt;
+#include &lt;stdlib.h&gt;
+
+// prototipos das funcoes
+void init(void);
+void display(void);
+void keyboard(unsigned char key, int x, int y);
+
+// funcao principal
+int main(int argc, char** argv){
+  glutInit(&amp;argc, argv);                              // inicializa o glut
+  glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);           // especifica o uso de cores e buffers
+  glutInitWindowSize (256, 256);                          // especifica as dimensoes da janela
+  glutInitWindowPosition (100, 100);                      // especifica aonde a janela aparece na tela
+  glutCreateWindow ("Desenhando uma linha");              // cria a janela
+  init();
+  glutDisplayFunc(display);                               // funcao que sera redesenhada pelo GLUT
+  glutKeyboardFunc(keyboard);                             // funcoes de teclado
+  glutMainLoop();                                         // mostra todas as janelas criadas
+  return 0;
+}
+
+// definicao de cada funcao
+
+void init(void){
+  glClearColor(1.0, 1.0, 1.0, 1.0);    // cor de fundo
+  glOrtho (0, 256, 0, 256, -1 ,1);     // modo de projecao ortogonal
+} 
+
+void display(void){
+  int i;
+  glClear(GL_COLOR_BUFFER_BIT);               // limpa a janela
+  glColor3f (0.0, 0.0, 0.0);                  // cor da linha
+  glBegin(GL_LINES);
+  glVertex2i(40,200);  glVertex2i(200,10);    // coordenadas inicial e final da linha
+  glEnd();
+  glFlush();
+}
+
+void keyboard(unsigned char key, int x, int y){
+  switch (key) {
+  case 27:                                         // tecla Esc (encerra o programa)
+	exit(0);
+	break;
+  }
+}</pre></td></tr></tbody></table></div>
+<p>Para compilar e executar o programa <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/linha.c" target="_top"><tt class="FILENAME">linha.c</tt></a>, salve-o juntamente com o 
+arquivo <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/Makefile" target="_top">Makefile</a> em um diretório e execute a seguinte seqüência de 
+comandos:</p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="SCREEN"><tt class="PROMPT">$</tt> <b class="COMMAND">make</b> <span class="OPTION">linha</span>
+<tt class="PROMPT">$</tt> <b class="COMMAND">./linha</b></pre></td></tr></tbody></table>
+<p>A saída do programa <b class="COMMAND">linha</b> é mostrado na <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html#FIG-LINHA">Figura 
+2-1</a>.</p>
+<div class="FIGURE">
+<p><b><a name="FIG-LINHA">Figura 2-1. saída do programa <b class="COMMAND">linha</b></a></b></p><font color="red"><font color="red"><font color="red"></font></font></font>
+<p><img src="2.desenhando-linhas-pontos_arquivos/linha.jpg"></p></div>
+<div class="SECT1">
+<h1 class="SECT1"><a name="AEN174">2.1. Descrição do programa <tt class="FILENAME">linha.c</tt></a></h1>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">#include &lt;GL/glut.h&gt;
+#include &lt;stdlib.h&gt;</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Estes includes definem os protótipos das funções utilizadas pelo programa. 
+<tt class="FILENAME">stdlib.h</tt> contém o protótipo da função <span class="CITEREFENTRY"><span class="REFENTRYTITLE">exit</span>(3)</span>; O arquivo de 
+cabeçalho <tt class="FILENAME">glut.h</tt> inclui, além dos protótipos das funções 
+GLUT, os arquivos <tt class="FILENAME">gl.h</tt> e <tt class="FILENAME">glu.h</tt>, 
+que contém os protótipos das funções principais e auxiliares do OpenGL.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">void init(void);
+void display(void);
+void keyboard(unsigned char key, int x, int y);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Funções implementadas após a função <span class="CITEREFENTRY"><span class="REFENTRYTITLE">main</span></span> devem ser prototipadas aqui, de modo a 
+evitar erros de compilação.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">int main(int argc, char** argv){</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Todo programa em C/C++ inicia com a função <span class="CITEREFENTRY"><span class="REFENTRYTITLE">main</span></span>. </p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutInit(&amp;argc, argv);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Inicializa a biblioteca GLUT e negocia uma seção com o gerenciador de 
+janelas. É possível passar argumentos para a função glutInit provenientes da 
+linha de execução, tais como a variável de ambiente <tt class="ENVAR">DISPLAY</tt>, ou informações sobre a geometria da tela.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Informa à biblioteca GLUT o modo do display a ser utilizado quando a janela 
+gráfica for criada. O <i class="FOREIGNPHRASE">flag</i> <tt class="PARAMETER"><i>GLUT_SINGLE</i></tt> força o uso de uma janela com <i class="FOREIGNPHRASE">buffer</i> simples, significando que todos os desenhos serão 
+feitos diretamente nesta janela. O <i class="FOREIGNPHRASE">flag</i> <tt class="PARAMETER"><i>GLUT_RGB</i></tt> diz que o modelo de cor utilizado será o 
+RGB.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutInitWindowSize (256, 256); 
+  glutInitWindowPosition (100, 100); </pre></td></tr></tbody></table>
+<p></p></div>
+<p>Define o tamanho inicial da janela, 256x256 pixels, e a posição inicial do 
+seu canto superior esquerdo na tela, (x, y)=(100, 100). </p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutCreateWindow ("Desenhando uma linha");</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Cria uma janela e define seu título como "<span class="GUILABEL">Desenhando uma 
+linha</span>".</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  init();</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Nesta função é definido o estado inicial do OpenGL, antes de qualquer desenho 
+seja feito.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutDisplayFunc(display); </pre></td></tr></tbody></table>
+<p></p></div>
+<p>Define <tt class="FUNCTION">display()</tt> como a função de desenho (<i class="FOREIGNPHRASE">display callback</i>) para a janela corrente. Quando GLUT 
+determina que esta janela deve ser redesenhada, a função de desenho é chamada. A 
+função de desenho deve possuir o seguinte protótipo:</p>
+<div class="FUNCSYNOPSIS">
+<p></p>
+<p><code><code class="FUNCDEF">void funcao()</code>(void);</code></p>
+<p></p></div>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutKeyboardFunc(keyboard);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Indica que sempre que uma tecla for pressionada no teclado, GLUT deverá chama 
+a função <tt class="FUNCTION">keyboard()</tt> para tratar eventos de teclado (<i class="FOREIGNPHRASE">keyboard callback</i>). A função de teclado deve possuir o 
+seguinte protótipo:</p>
+<div class="FUNCSYNOPSIS">
+<p></p>
+<p><code><code class="FUNCDEF">void funcao()</code>(unsigned char key, int x, int 
+y);</code></p>
+<p></p></div>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glutMainLoop();</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Inicia o <i class="FOREIGNPHRASE">loop</i> de processamento de desenhos com 
+GLUT. Esta rotina deve ser chamada pelo menos uma vez em um programa que utilize 
+a biblioteca GLUT.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  return 0;
+}</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Finaliza o programa.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">void init(void){
+  glClearColor(1.0, 1.0, 1.0, 1.0);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Especifica as intensidade de vermelho (<i class="FOREIGNPHRASE">RED</i>), verde 
+(<i class="FOREIGNPHRASE">GREEN</i>) e azul (<i class="FOREIGNPHRASE">BLUE</i>) 
+utilizadas para limpar a janela. Cada parâmetro pode varia de 0 a 1, o 
+equivalente a uma variação de 0 a 255, usada convecionalmente no sistema de 
+janelas. O último argumento é o canal alfa, usado para compor superfícies 
+transparentes ou translucentes. Como estes conceitos ainda não foram, o canal 
+alfa deve ser mantido com valor igual a 1.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glOrtho (0, 256, 0, 256, -1 ,1);
+}</pre></td></tr></tbody></table>
+<p></p></div>
+<p>A função glOrtho define as coordenadas do volume de recorte (<i class="FOREIGNPHRASE">clipping volume</i>), possuindo o seguinte protótipo:</p>
+<div class="FUNCSYNOPSIS">
+<p></p>
+<p><code><code class="FUNCDEF">void glOrtho()</code>( GLdouble left , GLdouble 
+right , GLdouble bottom , GLdouble top , GLdouble zNear , GLdouble zFar 
+);</code></p>
+<p></p></div>
+<p>Os parâmetros <tt class="PARAMETER"><i>left</i></tt> e <tt class="PARAMETER"><i>right</i></tt> especificam as coordenadas esquerda e direita, 
+respectivamente, dos planos de corte verticais. Os parâmetros <tt class="PARAMETER"><i>bottom</i></tt> e <tt class="PARAMETER"><i>top</i></tt> 
+especificam as coordenadas inferior e superior, respectivamente, dos planos de 
+corte horizontais. <tt class="PARAMETER"><i>zNear</i></tt> e <tt class="PARAMETER"><i>zFar</i></tt>, por sua vez, especificam a coordenada mais 
+próxima e mais distante do observador, respectivamente, no eixo de profundidade. 
+Assim, o volume de recorte definido no exemplo será x<sub>min</sub>=0 e 
+x<sub>max</sub>=256; y<sub>min</sub>=0 e y<sub>max</sub>=256; z<sub>min</sub>=-1 
+e z<sub>max</sub>=1.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">void display(void){
+  int i;
+  glClear(GL_COLOR_BUFFER_BIT);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>A função <tt class="FUNCTION">glClear()</tt> serve para limpar <i class="FOREIGNPHRASE">buffers</i> utilizados pelo OpenGL com valores 
+pré-definidos. A máscara utilizada neste exemplo, <tt class="PARAMETER"><i>(GL_COLOR_BUFFER_BIT</i></tt>, diz à função <tt class="FUNCTION">glClear()</tt> que apenas o <i class="FOREIGNPHRASE">buffer</i> de 
+desenho deve ser limpo. Após a execução desta função, a tela ficará branca, uma 
+vez que a <tt class="FUNCTION">init()</tt> define (R, G, B)=(1.0, 1.0, 1.0) como 
+cor de limpeza de tela.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glColor3f (0.0, 0.0, 0.0);</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Especifica (R, G, B)=(0, 0, 0), preto, como a cor de desenho. Todos os 
+objetos desenhados a partir daqui terão cor preta.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">  glBegin(GL_LINES);
+  glVertex2i(40,200);  glVertex2i(200,10);
+  glEnd();</pre></td></tr></tbody></table>
+<p></p></div>
+<p>As funções <tt class="FUNCTION">glBegin()</tt> e <tt class="FUNCTION">glEnd()</tt> delimitam os vértices de uma primitiva de desenho ou 
+de um grupo de primitivas. O parâmetro passado para a função especifica o tipo 
+de primitiva a ser desenhado. Neste exemplo, o parâmetro <tt class="PARAMETER"><i>GL_LINES</i></tt> indica que os vértices especificados devem 
+ser tratados como pares de pontos que comporão segmentos de reta independentes. 
+A função <tt class="FUNCTION">glVertex2i()</tt> define as coordenadas de um 
+vértice.</p>
+<div class="INFORMALEXAMPLE">
+<p></p>
+<table width="100%" bgcolor="#e0e0e0" border="0">
+  <tbody>
+  <tr>
+    <td><pre class="PROGRAMLISTING">void keyboard(unsigned char key, int x, int y){
+  switch (key) {
+  case 27:
+	exit(0);
+	break;
+  }
+}</pre></td></tr></tbody></table>
+<p></p></div>
+<p>Conforme mencionado, a função <tt class="FUNCTION">keyboard()</tt> serve para 
+tratar eventos de teclado. Sua implementação especifica que quando a tecla <b class="KEYCAP">ESC</b> (<i class="FOREIGNPHRASE">keycode</i>=<span class="KEYCODE">27</span>) for pressionada o programa deverá ser 
+finalizado.</p></div></div>
+<div class="NAVFOOTER">
+<hr width="100%" align="left">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <td valign="top" width="33%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas-dev.html">Prev</a></td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html">Home</a></td>
+    <td valign="top" width="33%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-funcoes.html">Next</a></td></tr>
+  <tr>
+    <td valign="top" width="33%" align="left">Compilando programas que utilizam 
+      OpenGL</td>
+    <td valign="top" width="34%" align="middle">&nbsp;</td>
+    <td valign="top" width="33%" align="right">Descrição de algumas funções - Manual do GLUT</td></tr></tbody></table></div></body></html>

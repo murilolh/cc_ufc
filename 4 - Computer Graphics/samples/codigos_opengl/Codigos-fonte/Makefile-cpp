@@ -1,0 +1,12 @@
+
+INCPATH = -I /usr/X11R6/include/ -I .
+LIBS = -lglut -lGLU -lGL -lXi -lX11 -lm -lpthread -ljpeg -lGLEW
+LIBPATH = -L/usr/lib -L/usr/X11R6/lib/ 
+CXXFLAGS = -g -Wall main.cpp
+
+bibutil.o: bibutil.cpp bibutil.h
+	g++ -c $(CXXFLAGS) bibutil.cpp
+
+%:%.cpp bibutil.o
+	g++ $(INCPATH) $(LIBPATH) $^ $(LIBS) $(CXXFLAGS) -o $@
+

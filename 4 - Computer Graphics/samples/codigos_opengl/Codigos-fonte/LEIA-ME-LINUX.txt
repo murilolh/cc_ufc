@@ -1,0 +1,24 @@
+Nota sobre a utilização dos makefiles:
+--------------------------------------
+
+Makefile - para os exemplos que não utilizam a bibutil.
+Makefile-bibutil - para os exemplos que utilizam a bibutil.
+Makefile-cpp - específico para o exemplo de C++ (ExemploCpp).
+Makefile-todos - compila TODOS os exemplos
+
+Para utilizar este último e compilar todos os exemplos, execute o seguinte comando:
+
+Make -f Makefile-todos
+
+Para compilar individualmente, determine se o exemplo faz uso da bibutil
+e selecione o makefile apropriado na chamada ao comando make:
+
+Sem bibutil: make <ExemploSemBibutil>
+
+Com bibutil: make -f Makefile-bibutil <ExemploComBibutil>
+
+Na prática, os únicos programas que não podem ser compilados com o
+Makefile-bibutil são o exemplo de C++ (ExemploCPP.cpp, main.cpp)
+e Exemplo3DPiramide.cpp, pois este define uma estrutura que entra em
+conflito com o mesmo nome já definido na bibutil.
+

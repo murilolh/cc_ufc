@@ -1,0 +1,115 @@
+<html><head><title>Exercícios</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta content="MSHTML 6.00.2600.0" name="GENERATOR"><link title="Introdução à computação gráfica com OpenGL" href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html" rel="HOME"><link title="Transformações geométricas" href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-outros.html" rel="UP"><link title="Transformações geométricas" href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-outros.html" rel="PREVIOUS"><link title="Modelagem de Sólidos" href="http://www.ceset.unicamp.br/%7Emagic/opengl/modelagem-solidos.html" rel="NEXT"></head><body text="#000000" bgcolor="#ffffff">
+<div class="NAVHEADER">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <th colspan="3" align="middle">Introdução à computação gráfica com 
+OpenGL</th></tr>
+  <tr>
+    <td valign="bottom" width="10%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-outros.html">Prev</a></td>
+    <td valign="bottom" width="80%" align="middle">Capítulo 4. Transformações 
+      geométricas</td>
+    <td valign="bottom" width="10%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/modelagem-solidos.html">Next</a></td></tr></tbody></table>
+<hr width="100%" align="left">
+</div>
+<div class="SECT1">
+<h1 class="SECT1"><a name="TRANSFORMACOES-EXERCICIOS">4.4. Exercícios</a></h1>
+<p></p>
+<p><b>Exercício obrigatório (2008)</b></p>
+<ol type="1">
+<li>
+  <p>A coordenação do curso de Tecnologia em Informática tem um projeto de alterar a estrutura
+física do laboratório de informática 4 (novo <i>layout</i>), destinado ao desenvolvimento de trabalhos de conclusão 
+de curso. Modele via OpenGL a área correspondente ao "novo LAB 4" (em escala, de preferência), 
+contendo no mínimo:<br>
+- bancadas para 20 computadores<br>
+- 1 lousa branca <br>
+- 1 porta (abertura lateral) <br>
+- Suporte para retroprojetor no teto<br>
+</p><p>Os objetos deverão ser construídos com funções do tipo <i>solid</i> (veja exemplo abaixo de como passar
+do modelo <i>wire</i> para sólido). Caso insira telhado/cobertura no ambiente, permita que o mesmo seja habilitado/desabilitado através
+de uma tecla.</p>
+<p></p></li></ol>
+
+<p><b>Exercício obrigatório (2007) </b></p>
+<ol type="1">
+<li>
+  <p>Modele via OpenGL a área correspondente à secretaria acadêmica do CESET, contendo no mínimo:<br>
+- balcão de atendimento<br>
+- 1 mural de avisos <br>
+- porta (abertura lateral) <br>
+- Algum objeto sobre o balcão(ou escrivaninha)<br>
+(Caso insira telhado/cobertura no ambiente, permita que o mesmo seja habilitado/desabilitado através
+de uma tecla)
+</p></li></ol>
+
+<p><b>Exercício obrigatório (2006) </b></p>
+<ol type="1">
+<li>
+  <p>Modele via OpenGL um escritório (ou parte dele) contendo, no mínimo:<br>
+- uma escrivaninha<br>
+- prateleiras para livros<br>
+- Algum objeto sobre a prateleira (ou escrivaninha)<br>
+</p></li></ol>
+
+
+<p><b>Aquecimento (não é necessário entregar)</b></p>
+<ol type="1">
+<li>
+  <p><b>(atenção! O enunciado dessa questão explica a passagem de <i>wire</i> para sólido)</b> Copie o programa <tt class="FILENAME">braco-garra.c</tt> que você criou com o 
+  nome <tt class="FILENAME">braco-garra-3d.c</tt>. Neste novo programa, modifique 
+  o trecho da função <tt class="FUNCTION">main()</tt> que define o modo de 
+  apresentação no GLUT. Use a seguinte chamada para a função de inicialização: 
+  <tt class="FUNCTION">glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | 
+  GLUT_DEPTH)</tt>, pois inclui o tratamento de profundidade e de superfícies 
+  escondidas no OpenGL . Além disso, ao invés de utilizar chamadas à função <tt class="FUNCTION">glutWireCube()</tt>, inclua chamadas apenas à função <tt class="FUNCTION">glutSolidCube()</tt>, que contém os mesmos argumentos. 
+  Acrescente em <tt class="FUNCTION">init()</tt> a chamada da função <tt class="FUNCTION">glEnable(<tt class="PARAMETER"><i>GL_DEPTH_TEST</i></tt>);</tt> de modo
+ que o tratamento de 
+  superfícies escondidas seja feito pelo OpenGL. Na função display, substitua <tt class="PARAMETER"><i>glClear(GL_COLOR_BUFFER_BIT); </i></tt> por <tt class="PARAMETER"><i>glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);</i></tt>.Utilize cores diferentes para 
+  cada uma das partes do braço, de modo a obter um modelo semelhante ao da <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-exercicios.html#FIG-BRACO-3D">Figura 
+  4-4</a>. </p>
+  <div class="FIGURE">
+  <p><b><a name="FIG-BRACO-3D">Figura 4-4. Braço robótico 3D</a></b></p>
+  <p><img src="4.4.transformacoes-exercicios_arquivos/braco_cor.jpg"></p></div>
+</li><li>
+  <p>Faça alterações no programa <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/braco.c" target="_top"><tt class="FILENAME">braco.c</tt></a> de modo a compreender o uso de
+  transformações geométricas. Implemente programas com um ou mais cubos (veja um exemplo em <b>4.2 Outros Programas Relacionados</b>), efetuando translações, rotações e
+  escalamentos em cubos específicos. Após ter o domínio das transformações (e o uso dos comandos 
+  <i>glPushMatrix()</i> e <i>glPopMatrix()</i>), siga 
+  resolvendo os próximos exercícios.</p>
+  
+  </li><li>
+  <p>Utilizando o programa <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/braco.c" target="_top"><tt class="FILENAME">braco.c</tt></a> como referência, implemente um 
+  programa <tt class="FILENAME">braco-garra.c</tt>. Este programa deverá 
+  acrescente ao braço robótico uma garra com três dedos, sendo um indicador, um 
+  médio e um polegar, como mostra a <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-exercicios.html#FIG-BRACO-GARRA">Figura 
+  4-3</a>. O usuário deverá poder rotacionar o dedo indicador com as teclas <b class="KEYCAP">i</b> e <b class="KEYCAP">I</b>, nos sentidos horário e 
+  anti-horário. Da mesma forma, as teclas <b class="KEYCAP">p</b> <b class="KEYCAP">P</b> deverão rotacionar o polegar, e teclas <b class="KEYCAP">m</b> <b class="KEYCAP">M</b>, o dedo médio do robô.</p>
+  <div class="FIGURE">
+  <p><b><a name="FIG-BRACO-GARRA">Figura 4-3. Braço robótico com garra</a></b></p>
+  <p><img src="4.4.transformacoes-exercicios_arquivos/braco-garra.jpeg"></p></div>
+  
+</li><li> <p> Modele via OpenGL uma parte de um banheiro conforme mostra a Figura <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-exercicios.html#FIG-BANHEIRO">Figura 
+  4-5</a>. Use as teclas <b class="KEYCAP">a A</b> para abrir e <b class="KEYCAP">f F</b>, para 
+  fechar a porta do armário que fica abaixo da pia do banheiro. Tente fazer em escala. Inclua 
+também outro(s) elemento(s) a seu critério no programa anterior (vaso sanitário, armário 
+ao lado do espelho, janela, paredes, chuveiro e box etc).</p>
+  <div class="FIGURE">
+  <p><b><a name="FIG-BANHEIRO">Figura 4-5. Abertura e fechamento da porta do armário do banheiro.</a></b></p>
+  <p><img src="4.4.transformacoes-exercicios_arquivos/banheiro.jpg"></p></div>
+
+
+<div class="NAVFOOTER">
+<hr width="100%" align="left">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <td valign="top" width="33%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes-outros.html">Prev</a></td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html">Home</a></td>
+    <td valign="top" width="33%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/textura-simples.html">Next</a></td></tr>
+  <tr>
+    <td valign="top" width="33%" align="left">Outros programas relacionados</td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/transformacoes.html">Up</a></td>
+    <td valign="top" width="33%" align="right">Texturas e display lists</td></tr></tbody></table></div></li></ol></div></body></html>

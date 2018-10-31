@@ -1,0 +1,137 @@
+<html><head><title>Exercícios</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta content="MSHTML 6.00.2722.900" name="GENERATOR"><link title="Introdução à computação gráfica com OpenGL" href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html" rel="HOME"><link title="Desenhando linhas e pontos" href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html" rel="UP"><link title="Outros programas relacionados" href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-outros.html" rel="PREVIOUS"><link title="Preenchimento de regiões" href="http://www.ceset.unicamp.br/%7Emagic/opengl/preenchimento.html" rel="NEXT"></head><body text="#000000" bgcolor="#ffffff">
+<div class="NAVHEADER">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <th colspan="3" align="middle">Introdução à computação gráfica com 
+OpenGL</th></tr>
+  <tr>
+    <td valign="bottom" width="10%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-outros.html">Prev</a></td>
+    <td valign="bottom" width="80%" align="middle">Capítulo 2. Desenhando linhas e 
+      pontos</td>
+    <td valign="bottom" width="10%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/preenchimento.html">Next</a></td></tr></tbody></table>
+<hr width="100%" align="left">
+</div>
+<div class="SECT1">
+<h1 class="SECT1"><a name="DESENHANDO-EXERCICIOS">2.4. Exercícios</a></h1>
+<p></p>
+<b>(Exercícios obrigatórios - 2008) </b> 
+<ol type="1">
+ <li>
+  <p> Utilizando o algoritmo de Bresenham, construa um programa de nome <tt class="FILENAME">circ_seq.c</tt> que 
+plote pontos de um círculo de raio <i>X</i>, lido via teclado. Os pontos do círculo devem ser 
+plotados de maneira seqüencial a partir de comando manual ou comandados por algum recurso de
+temporização. Utilize pontos de tamanho superior ao <i>default</i> do OpenGL.</p>
+ </li><li>
+<p>Construir o desenho abaixo utilizando <tt class="PARAMETER"><i>GL_TRIANGLES</i></tt> ou <tt class="PARAMETER"><i>GL_TRIANGLES_STRIP</i></tt> como parâmetro da função <tt class="FUNCTION">glBegin()</tt>. O programa deve possuir o nome <tt class="FILENAME">trelica.c</tt>. 
+  Apresente o programa com a menor repetição de vértices.</p>
+  <div class="FIGURE">
+  <p><b><a name="FIG-TRIG">Treliça (em azul).</a></b></p>
+  <p><img src="2.4.desenhando-exercicios_arquivos/trelica2008.jpg"></p></div>
+
+</li></ol></div>
+<p></p>
+<b>(Exercícios obrigatórios - 2007) </b> 
+<ol type="1">
+ <li>
+  <p> Utilizando o programa <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/linha.c" target="_top"><tt class="FILENAME">linha.c</tt></a> como referência, implemente 
+ um programa chamado <tt class="FILENAME">linha_teclado.c</tt>. O programa deve desenhar
+  uma reta tracejada, de cor amarela, para dois pontos (x1, y1) e (x2, y2) lidos via teclado. Faça a
+análise dos pontos digitados, verificando  se os mesmos pertencem à janela criada.</p>
+ </li><li>
+  <p>Os pontos abaixo pertencem a um arquivo denominado <tt class="FILENAME">contorno.txt</tt>. 
+Cada linha contém as coordenadas (x,y) de um ponto. Desenvolva um programa que leia os pontos 
+e plote a figura correspondente em uma janela de tamanho 128x128. O último ponto deve ser 
+conectado ao primeiro.</p>
+90 20 <br>
+90 30<br>
+95 40<br>
+90 45<br>
+85 45<br>
+80 40<br>
+75 40<br>
+70 45<br>
+65 45<br>
+60 50<br>
+55 55<br>
+50 55<br>
+35 60<br>
+25 65<br>
+10 60<br>
+05 60<br>
+05 65<br>
+15 70<br>
+20 70<br>
+20 80<br>
+30 90<br>
+45 90<br>
+55 85<br>
+65 95<br>
+80 95<br>
+70 80<br>
+80 75<br>
+90 65<br>
+100 40<br>
+115 35<br>
+110 30<br>
+100 30<br>
+</li></ol>
+<p></p>
+<b>(Exercícios opcionais - não é necessário entregar) </b> 
+<ol type="1">
+  <li>
+  <p>Utilizando o programa <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/linha.c" target="_top"><tt class="FILENAME">linha.c</tt></a> como referência, implemente 
+ um programa chamado <tt class="FILENAME">cubo_paralele.c</tt>.
+Este programa deverá desenhar em uma janela com fundo branco, de
+dimensões 300x300 pixels, dois cubos ou paralelepípedos em perspectiva
+utilizando, para cada um deles, primitivas diferentes do OpenGL. Qual a
+primitiva que constroi o objeto com a quantidade mais reduzida de
+instruções ou linhas de programa? (reutilizar os vértices do cubo, por
+exemplo). A linha que define o objeto deve ter uma cor diferente da cor
+preta.</p>
+
+  </li><li>Escolha um dos três exercícios abaixo:
+  <p>(a) Implemente o algoritmo DDA para traçado de linhas, utilizando <tt class="PARAMETER"><i>GL_POINTS</i></tt> como parâmetro da função <tt class="FUNCTION">glBegin()</tt>. Este parâmetro indica que cada vértice deve ser 
+  tratado como um ponto simples. Utilizando o algoritmo implementado, desenhe 
+  uma reta amarela para dois pontos (x1, y1) e (x2, y2) lidos via teclado. O programa deve
+aceitar pontos pertecentes somente ao terceiro quadrante. Verifique se há necessidade de alguma modificação no
+algoritmo DDA.</p>
+  <p>(a) Implemente o algoritmo de Bresenham para traçado de linhas (simples ou genérico), utilizando <tt class="PARAMETER"><i>GL_POINTS</i></tt> como parâmetro da função <tt class="FUNCTION">glBegin()</tt>. Este parâmetro indica que cada vértice deve ser 
+  tratado como um ponto simples. Utilizando o algoritmo implementado, desenhe 
+  uma reta amarela para dois pontos (x1, y1) e (x2, y2) lidos via teclado. Lembre-se que 
+  o algoritmo da transparência visto em aula só é válido para o primeiro octante. </p>
+  <p>(b) Implemente o algoritmo de Bresenham para traçado de circunferências, 
+  utilizando <tt class="PARAMETER"><i>GL_POINTS</i></tt> como parâmetro da função 
+  <tt class="FUNCTION">glBegin()</tt>. A cor do contorno da circunferência deverá ser vermelha. O raio e
+  o centro do círculo são lidos via teclado.</p>
+</li><li>
+  <p>Elabore um programa que construa 2 retas que unam três pontos informados via teclado. Apresente um menu no qual o 
+usuário escolhe a cor da linha (duas cores possíveis), o tipo da linha (contínua ou tracejada) e se o mesmo deseja
+que seja contruído um triângulo a partir dos 3 pontos (utilizando <tt class="PARAMETER"><i>GL_TRIANGLES</i></tt> ou <tt class="PARAMETER"><i>GL_TRIANGLES_STRIP</i></tt>).</p>
+</li><li>
+  <p> Construir o desenho abaixo utilizando <tt class="PARAMETER"><i>GL_TRIANGLES</i></tt> ou <tt class="PARAMETER"><i>GL_TRIANGLES_STRIP</i></tt> como parâmetro da função <tt class="FUNCTION">glBegin()</tt>. O programa deve possuir o nome <tt class="FILENAME">bandeira.c</tt>. 
+  Apresente o programa com a menor repetição de vértices.</p>
+  <div class="FIGURE">
+  <p><b><a name="FIG-TRIG">Bandeira estilizada</a></b></p>
+  <p><img src="2.4.desenhando-exercicios_arquivos/exbandeira2006.jpg"></p></div>
+ </li><li>
+  <p>Utilizando os programas que tratam com caracteres no openGL como referências, insira no programa feito 
+na questão anterior o seu nome (ou o nome do programa, nome da dupla), na janela de desenho. Inclua linhas de 
+comentários explicando as principais funções e ou principais partes do programa.</p>
+</li></ol>
+<div class="NAVFOOTER">
+<hr width="100%" align="left">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <td valign="top" width="33%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-outros.html">Prev</a></td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html">Home</a></td>
+    <td valign="top" width="33%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/preenchimento.html">Next</a></td></tr>
+  <tr>
+    <td valign="top" width="33%" align="left">Outros programas relacionados</td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html">Up</a></td>
+    <td valign="top" width="33%" align="right">Preenchimento de 
+  regiões</td></tr></tbody></table></div></body></html>

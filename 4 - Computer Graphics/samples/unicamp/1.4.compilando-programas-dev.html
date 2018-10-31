@@ -1,0 +1,53 @@
+<html><head><title>Compilando programas - Usando o Dev-C++</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta content="MSHTML 6.00.2722.900" name="GENERATOR"><link title="Introdução à computação gráfica com OpenGL" href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html" rel="HOME"><link title="Conceitos iniciais" href="http://www.ceset.unicamp.br/%7Emagic/opengl/conceitos-iniciais.html" rel="UP"><link title="Estrutura de um programa" href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas.html" rel="PREVIOUS"><link title="Desenhando linhas e pontos" href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html" rel="NEXT"></head><body text="#000000" bgcolor="#ffffff">
+<div class="NAVHEADER">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <th colspan="3" align="middle">Introdução à computação gráfica com 
+OpenGL</th></tr>
+  <tr>
+    <td valign="bottom" width="10%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas.html">Prev</a></td>
+    <td valign="bottom" width="80%" align="middle">Capítulo 1. Conceitos 
+    iniciais</td>
+    <td valign="bottom" width="10%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html">Next</a></td></tr></tbody></table>
+<hr width="100%" align="left">
+</div>
+<div class="SECT1">
+<h1 class="SECT1"><a name="COMPILANDO-PROGRAMAS">1.4. Compilando programas que 
+utilizam OpenGL - Windows (Dev-C++)</a></h1>
+<p>O Dev-C++ utiliza o compilador MinGW (Minimalist GNU For Windows - Veja o link <a href="http://www.mingw.org/" target="_top">http://www.mingw.org</a>). Sua instalação é simples não ocupa muito espaço (menos de 30M). </p>
+<p>Para compilar um programa OpenGL você deve: </p>
+
+<ol type="1">
+  <li> Criar um projeto vazio <b>New / Project / Empty Project</b>; 
+
+  </li><li>Digitar o seu código fonte; 
+</li><li> Na barra de menu do Dev selecionar <b>Project / Project Options</b>; 
+</li><li> Na opção <b>Further object files or link options</b> escrever: <b>-lglut32 -lglu32 -lopengl32</b>, conforme
+ilustra a <a href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas-dev.html#FIG-DEV">Figura 1-4</a>; 
+<div class="FIGURE">
+<p><b><a name="FIG-DEV">Figura 1-4. DEV-C++, Version 4 - Opções da linkedição das bibliotecas.</a></b></p>
+<p></p><font color="red"><font color="red"><font color="red"></font></font></font>
+<p><img src="1.4.compilando-programas-dev_arquivos/dev_biblio.jpg"></p></div>
+
+</li><li> Remover as linhas <b>#include &lt;gl.h&gt;</b> ou <b>#include &lt;glu.h&gt;</b> do código fonte, deixando apenas o <b>#include &lt;gl/glut.h&gt;</b>; 
+</li><li>Compilar e executar. 
+</li></ol>
+<p>As instruções para instalação do Dev-C++ e o Mesa no Windows estão no link <a href="http://www.ceset.unicamp.br/%7Emagic" target="_top">http://www.ceset.unicamp.br/~magic</a>. </p>
+
+<div class="NAVFOOTER">
+<hr width="100%" align="left">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr>
+    <td valign="top" width="33%" align="left"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/compilando-programas.html">Prev</a></td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/index2006.html">Home</a></td>
+    <td valign="top" width="33%" align="right"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/desenhando-linhas-pontos.html">Next</a></td></tr>
+  <tr>
+    <td valign="top" width="33%" align="left">Compilando programas</td>
+    <td valign="top" width="34%" align="middle"><a href="http://www.ceset.unicamp.br/%7Emagic/opengl/conceitos-iniciais.html">Up</a></td>
+    <td valign="top" width="33%" align="right">Desenhando linhas e 
+  pontos</td></tr></tbody></table></div></div></body></html>
