@@ -1,9 +1,0 @@
-8 3 LEITE_ID ANIMAL TIPO
-4 Ovelha 1
-5 Cabra 1
-1 Bufala 1
-7 Egua 1
-2 Camelo 1
-3 Vaca 1
-6 Rena 1
-8 Yak 1
