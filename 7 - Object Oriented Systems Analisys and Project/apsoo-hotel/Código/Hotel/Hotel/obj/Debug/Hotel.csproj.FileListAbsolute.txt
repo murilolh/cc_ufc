@@ -1,7 +1,0 @@
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\bin\Hotel.dll
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\bin\Hotel.pdb
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\bin\Microsoft.Web.Mvc.DataAnnotations.dll
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\bin\System.ComponentModel.DataAnnotations.dll
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\obj\Debug\Hotel.dll
-C:\Users\Murilo Holanda\UFC\APSOO\Projeto\apsoo-hotel\Código\Hotel\Hotel\obj\Debug\Hotel.pdb
