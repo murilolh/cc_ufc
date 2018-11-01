@@ -1,0 +1,79 @@
+Figura 3.26
+
+------------------------------------------------------------------------------------
+
+import java.net.*;
+import java.io.*;
+
+public class Server {
+
+    public static void main(String[] args) throws IOException {
+        Socket client = null;
+        ServerSocket sock = null;
+
+        try {
+            /**
+             * usando a porta 6013.
+             */
+            sock = new ServerSocket(6013);
+
+            // aguarda conexões
+            while (true) {
+                client = sock.accept();
+                System.out.println("server = " + sock);
+                System.out.println("client = " + client);
+
+                // conexao aceita
+                PrintWriter pout = new PrintWriter(client.getOutputStream(),
+                        true);
+
+                // escreve o numero da sorte para o socket
+                pout.println(new java.util.Date().toString());
+
+                pout.close();
+                client.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (sock != null)
+                sock.close();
+            if (client != null)
+                client.close();
+        }
+    }
+}
+
+--------------------------------------------------------------------
+
+Figura 3.27
+-------------------------------------------------------------------
+import java.net.*;
+import java.io.*;
+
+public class Client {
+
+
+    public static void main(String[] args) throws IOException {
+
+        InputStream in = null;
+        BufferedReader bin = null;
+        Socket sock = null;
+
+        try {
+            sock = new Socket("127.0.0.1", 6013);
+            in = sock.getInputStream();
+            bin = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while ((line = bin.readLine()) != null) {
+                System.out.println(line);
+            }
+
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        } finally {
+            sock.close();
+        }
+    }
+}
