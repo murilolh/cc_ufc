@@ -1,0 +1,6 @@
+1; bb;
+2; bnb;
+3; bradesco;
+4; caixa;
+5; itau;
+6; real;
