@@ -1,0 +1,142 @@
+Número de Comandos: 6 
+Numero de Variáveis: 3 
+
+--- 1ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    0
+ Com2 |  1    0    0
+ Com3 |  0    1    1
+ Com4 |  0    1    0
+ Com5 |  1    0    0
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    0
+ Com2 |  0    0    0
+ Com3 |  0    0    0
+ Com4 |  0    0    0
+ Com5 |  0    0    0
+ Com6 |  0    0    0
+
+--- 2ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    0
+ Com2 |  1    0    0
+ Com3 |  0    1    1
+ Com4 |  0    1    0
+ Com5 |  1    0    0
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  1    0    0
+ Com2 |  0    1    1
+ Com3 |  0    1    0
+ Com4 |  1    0    0
+ Com5 |  0    0    1
+ Com6 |  0    0    0
+
+--- 3ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    0
+ Com2 |  1    0    1
+ Com3 |  0    1    1
+ Com4 |  0    1    0
+ Com5 |  1    0    1
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  1    0    0
+ Com2 |  0    1    1
+ Com3 |  0    1    0
+ Com4 |  1    0    0
+ Com5 |  0    0    1
+ Com6 |  0    0    0
+
+--- 4ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    0
+ Com2 |  1    0    1
+ Com3 |  0    1    1
+ Com4 |  0    1    0
+ Com5 |  1    0    1
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  1    0    1
+ Com2 |  0    1    1
+ Com3 |  0    1    0
+ Com4 |  1    0    1
+ Com5 |  0    0    1
+ Com6 |  0    0    0
+
+--- 5ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    1
+ Com2 |  1    0    1
+ Com3 |  0    1    1
+ Com4 |  0    1    1
+ Com5 |  1    0    1
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  1    0    1
+ Com2 |  0    1    1
+ Com3 |  0    1    0
+ Com4 |  1    0    1
+ Com5 |  0    0    1
+ Com6 |  0    0    1
+
+--- 6ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    1
+ Com2 |  1    0    1
+ Com3 |  0    1    1
+ Com4 |  0    1    1
+ Com5 |  1    0    1
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  1    0    1
+ Com2 |  0    1    1
+ Com3 |  0    1    1
+ Com4 |  1    0    1
+ Com5 |  0    0    1
+ Com6 |  0    0    1
+
+--- 7ª Iteração --- 
+
+IN: 
+        Var0 Var1 Var2 
+ Com1 |  0    0    1
+ Com2 |  1    0    1
+ Com3 |  0    1    1
+ Com4 |  0    1    1
+ Com5 |  1    0    1
+ Com6 |  0    0    1
+
+OUT: 
+        Var0 Var1 Var2 
+ Com1 |  1    0    1
+ Com2 |  0    1    1
+ Com3 |  0    1    1
+ Com4 |  1    0    1
+ Com5 |  0    0    1
+ Com6 |  0    0    1

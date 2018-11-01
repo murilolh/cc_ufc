@@ -1,0 +1,244 @@
+options
+{
+  STATIC = false;
+  LOOKAHEAD = 2;
+  DEBUG_PARSER = false;
+  DEBUG_LOOKAHEAD = false;
+  CHOICE_AMBIGUITY_CHECK = 2;
+  BUILD_PARSER = true;/*opcao para debug isso faz o javacc gerar apenas o lexer e naum o parser*/
+}
+
+PARSER_BEGIN(Parser)
+package lexicAnalizer;
+
+public class Parser{}
+
+PARSER_END(Parser)
+
+SKIP :/*elementos que devem ser analisado, mas nao devem gerar tokens*/
+{
+  " " |
+  "\r" |
+  "\t" |
+  "\n" |
+  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")> |
+  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">
+}
+
+TOKEN : /* Operadores*/
+{
+  < EQUALS : "="> |
+  < PLUS : "+" > |
+  < MINUS : "-" > |
+  < MULTIPLY : "*" > |
+  < AND : "&&" > |
+  < NEGATION : "!">|
+  < LESS_THAN: "<"> |
+  < LBRACE : "{"> |
+  < RBRACE : "}"> |
+  < P_OPEN : "("> |
+  < P_CLOSE : ")"> |
+  < B_OPEN : "["> |
+  < B_CLOSE : "]"> |
+  < POINT : "."> |
+  < COMMA: ","> |
+  < CLOSER : ";">
+}
+
+TOKEN : /*Palavras reservadas da linguagem*/
+{
+   < WHILE : "while"> |
+   < IF : "if"> |
+   < RETURN : "return"> |
+   < EXTENDS : "extends"> |
+   < ELSE : "else"> |
+   < INT : "int"> |
+   < PUBLIC : "public"> |
+   < ARRAY_MODIFIER : "[]"> |
+   < STRING : "String"> |
+   < BOOLEAN: "boolean"> |
+   < TRUE:"true"> |
+   < FALSE: "false"> |
+   < CLASS: "class"> |
+   < THIS: "this"> |
+   < NEW : "new"> |
+   < PRINT : "System.out.println"> |
+   < LENGTH : "length"> |
+   < STATIC : "static">|
+   < VOID : "void">|
+   < MAIN : "main">
+}
+
+TOKEN :
+{
+  < ID : (< LETTER >)(<LETTER >|< DIGIT >)* > |
+  < INTEGERLITERAL : (< DIGIT >)+ > |
+  < #DIGIT : [ "0"-"9" ] > |
+  < #LETTER : ["a"-"z"]|["A"-"Z"]|"_">
+}
+
+void Program():
+{}
+{
+  Main_class()Class_decl_prime()
+}
+
+
+void Main_class():
+{}
+{
+  < CLASS > <ID > <LBRACE >< PUBLIC> <STATIC ><VOID ><MAIN > <P_OPEN > <STRING > <ARRAY_MODIFIER > <ID > <P_CLOSE > <LBRACE > Stat() < RBRACE > <RBRACE > 
+}
+
+void Class_decl():
+{
+}
+{
+  LOOKAHEAD(3)< CLASS ><ID ><LBRACE >Var_decl_prime() Method_decl_prime()< RBRACE > |
+  LOOKAHEAD(3)<CLASS><ID><EXTENDS><ID><LBRACE>Var_decl_prime() Method_decl_prime()< RBRACE >
+}
+
+void Class_decl_prime():
+{
+}
+{
+  Class_decl()Class_decl_prime() |
+  {}
+
+}
+
+void Var_decl():
+{}
+{
+	Type()<ID><CLOSER>
+}
+
+void Var_decl_prime():
+{
+}
+{
+Var_decl()Var_decl_prime() |
+  {}
+}
+
+void Method_decl():
+{}
+{
+	//<PUBLIC>Type()<ID><P_OPEN>Formal_list()<P_CLOSE><LBRACE> (Var_decl())* (Stat())* <RETURN> Exp() <CLOSER><RBRACE>
+	<PUBLIC>Type()<ID><P_OPEN>Formal_list()<P_CLOSE><LBRACE> Var_decl_prime() Stat_prime() <RETURN> Exp() <CLOSER><RBRACE>
+}
+
+void Method_decl_prime():
+{}
+{
+  Method_decl()Method_decl_prime() |
+  {}
+}
+
+void Formal_list():
+{}
+{
+	Type()<ID>(Formal_rest())* |
+	{}
+}
+
+void Formal_rest():
+{}
+{
+	<COMMA>Type()<ID>
+}
+
+void Type():
+{}
+{
+  	
+	<INT><ARRAY_MODIFIER> |
+	<BOOLEAN> |
+	<INT> |
+	< ID >
+}
+
+void Stat():
+{}
+{
+  	 
+	<LBRACE> Stat_prime() <RBRACE> |
+	<IF> <P_OPEN> Exp() <P_CLOSE> Stat() <ELSE> Stat() |
+	<WHILE> <P_OPEN> Exp() <P_CLOSE> Stat() |
+	<PRINT> <P_OPEN> Exp() <P_CLOSE> <CLOSER> |
+
+	<ID> <EQUALS> Exp() <CLOSER> |
+	<ID> <B_OPEN> Exp() <B_CLOSE> <EQUALS> Exp() < CLOSER >
+}
+
+void Stat_prime():
+{
+}
+{
+  Stat()Stat_prime() |
+  {}
+}
+
+void Exp():
+{//codigo java
+  
+}
+{//expressao
+   
+  <ID>Exp_prime()|
+  < INTEGERLITERAL>Exp_prime()|
+  < TRUE>Exp_prime()|
+  < FALSE>Exp_prime()|
+  < THIS>Exp_prime()|
+  < NEW>< INT>< B_OPEN>Exp()< B_CLOSE>Exp_prime()|
+  < NEW>< ID>< P_OPEN>< P_CLOSE>Exp_prime()|
+  < NEGATION>Exp()Exp_prime()|
+  < P_OPEN>Exp()< P_CLOSE>Exp_prime()
+}
+
+void Exp_prime():
+{
+  
+}
+{
+  Op()Exp()Exp_prime()|
+  < B_OPEN>Exp()< B_CLOSE>Exp_prime()|
+  < POINT>< LENGTH>Exp_prime()|
+  < POINT>< ID>< P_OPEN>Exp_list()< P_CLOSE> Exp_prime()|
+  {}
+}
+
+void Exp_list():
+{
+}
+{
+  //Exp()(Exp_rest())*|
+  Exp()Exp_rest_prime()|
+  {}
+}
+
+void Exp_rest():
+{
+}
+{
+  < COMMA>Exp()
+}
+
+void Exp_rest_prime():
+{}
+{
+  Exp_rest()Exp_rest_prime() |
+  {}
+}
+
+void Op():
+{
+}
+{
+  < PLUS  > |
+  < MINUS > |
+  < MULTIPLY > |
+  < AND > |
+  < LESS_THAN > |
+  < EQUALS >
+}

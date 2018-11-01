@@ -1,0 +1,366 @@
+options
+{
+  JDK_VERSION = "1.6";
+  static = false;
+}
+
+PARSER_BEGIN(Grammar)
+package javacc;
+
+import syntaxtree.*;
+import visitor.*;
+
+public class Grammar {}
+
+PARSER_END(Grammar)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+| < "/*" (~[])* "*/" >
+| "//" : singlelinecomment
+}
+
+<singlelinecomment> SKIP:
+{
+ 	   <["\n","\r"]> : DEFAULT |
+ 	   <~[]>
+}
+ 	
+TOKEN :
+{
+  < IF: "if" >
+| < ELSE: "else" >  
+| < WHILE: "while" >
+| < SOP: "System.out.println" >
+| < CLASS: "class" >
+| < PUBLIC: "public" >
+| < STATIC: "static" >
+| < VOID: "void" >
+| < MAIN: "main" >
+| < STRING: "String" >
+| < EXTENDS: "extends" >
+| < RETURN: "return" >
+| < INT: "int" >
+| < BOOLEAN: "boolean" >
+| < LENGTH: "length" >
+| < TRUE: "true" >
+| < FALSE: "false" >
+| < THIS: "this" >
+| < NEW: "new" >
+| < DOT: "." >
+| < SEMICOLON: ";" >
+| < COMMA: "," >
+| < EXCL: "!" >
+| < ASSIGN: "=">
+| < BRACE_L: "{" >
+| < BRACE_R: "}" >
+| < PAREN_L: "(" >
+| < PAREN_R: ")" >
+| < BRACKET_L: "[" >
+| < BRACKET_R: "]" >
+| < SUM : "+" >
+| < SUB : "-" >
+| < MULTI : "*" >
+| < LESSTHAN : "<" >
+| < AND : "&&" >
+| < #DIGIT: ["0"-"9"] >
+| < #MIN_LET: ["a"-"z"] >
+| < #MAI_LET: ["A"-"Z"] >
+| < #LET: <MIN_LET >|<MAI_LET > >
+| < UNDERSCORE: "_" >
+| < ID: <LET> ( <LET> | <DIGIT> | <UNDERSCORE>)* > 
+| < NUM: (<DIGIT>)+ > 
+| < REAL: ( (<DIGIT>)+ "." (<DIGIT>)* ) | 
+          ( (<DIGIT>)* "." (<DIGIT>)+ )>
+| < ERR: ~[] >
+}
+
+public Token getToken() : 
+{}
+{
+  ( <EOF>
+				  | <IF>
+				  | <ELSE>
+				  | <WHILE>
+				  | <SOP>
+		  | <CLASS>
+  		| <PUBLIC>
+  | <STATIC>
+  | <VOID>
+  | <MAIN>
+  | <STRING>
+  | <EXTENDS>
+  | <RETURN>
+  | <INT>
+  | <BOOLEAN>
+  | <LENGTH>
+  | <TRUE>
+  | <FALSE>
+  | <THIS>
+  | <NEW>
+  | <DOT>
+  | <SEMICOLON>
+  | <COMMA>
+  | <EXCL>
+  | <ASSIGN>
+  | <BRACE_L>
+  | <BRACE_R>
+  | <PAREN_L>
+  | <PAREN_R>
+  | <BRACKET_L>
+  | <BRACKET_R>
+  | <SUM>
+  | <SUB>
+  | <MULTI>
+  | <LESSTHAN>
+  | <AND>
+  | <UNDERSCORE>
+  | <ID> 
+  | <NUM> 
+  | <REAL>
+  | <ERR>)  
+  {
+    return this.token;
+  }  
+ }
+
+TProgram Program():
+{TMainClass mc; TClassDeclList cdl;}
+{
+  mc = MainClass() cdl = ClassDeclList() { return new TProgram(mc, cdl); }
+}
+
+TMainClass MainClass():
+{Token id1; Token id2; TStatement st;}
+{
+  < CLASS > id1 = < ID > < BRACE_L > < PUBLIC> < STATIC > < VOID > < MAIN > <PAREN_L > < STRING > < BRACKET_L > < BRACKET_R > id2 = < ID > < PAREN_R > < BRACE_L > st = Statement() < BRACE_R > < BRACE_R >
+  { return new TMainClass(new TIdentifier(id1.image), new TIdentifier(id2.image), st);}        
+}
+
+TClassDeclList ClassDeclList():
+{TClassDecl cd; TClassDeclList cl; }
+{
+		  cd = ClassDecl() cl = ClassDeclList()
+		  { cl.addElement(cd);		
+		    return cl;		}
+		   | < EOF >
+		   {		 return new TClassDeclList(); }				         
+}
+
+TClassDecl ClassDecl():
+{Token id1; TIdentifier cde; TVarDeclList vdl; TMethodDeclList mdl;}
+{
+		  (< CLASS > id1 = <ID >) ((cde = ClassDeclExtends() < BRACE_L > vdl = VarDeclList() mdl = MethodDeclList() < BRACE_R >)
+		  {	 return new TClassDeclExtends(new TIdentifier(id1.image), cde, vdl, mdl); }				 |
+		  ( < BRACE_L > vdl = VarDeclList() mdl = MethodDeclList() < BRACE_R >)
+		  { return new TClassDeclSimple(new TIdentifier(id1.image), vdl, mdl); 	})		       
+}
+
+TIdentifier ClassDeclExtends():
+{ Token id1; }
+{
+	  < EXTENDS > id1 = < ID > { return new TIdentifier(id1.image); 	}     	 
+}
+
+TVarDeclList VarDeclList():
+{TVarDecl vd; TVarDeclList vdl;}
+{
+	  vd = VarDecl() vdl = VarDeclList()
+	  { vdl.addElement(vd);
+	    return vdl;}	    
+	  | {	} { return new TVarDeclList(); }    
+	}
+
+TVarDecl VarDecl():
+{TType ty; Token id1;}
+{
+	  ty = Type() id1 = < ID > < SEMICOLON > { return new TVarDecl(ty, new TIdentifier(id1.image)); 	}    
+}
+
+TType Type():
+{Token id;}
+{
+  (
+    (< INT >)
+      (< BRACKET_L > < BRACKET_R > { return new TTypeIntegerArray(); }
+      |{} { return new TTypeInteger();}
+    )
+  )
+  | < BOOLEAN > { return new TTypeBoolean(); }    
+  | id = < ID > { return new TTypeIdentifier(id.image);}    
+}
+
+TMethodDeclList MethodDeclList():
+{TMethodDecl md; TMethodDeclList mdl;}
+{
+  md = MethodDecl() mdl = MethodDeclList()
+  { mdl.addElement(md); 
+    return mdl;}
+  | {} {return new TMethodDeclList();}
+}
+
+TMethodDecl MethodDecl():
+{TType ty; Token id1; TFormalList fl; TExp e;
+ TVarDeclList vdl = new TVarDeclList();
+ TStatementList sl = new TStatementList();}
+{
+  < PUBLIC > ty = Type() id1 = < ID > < PAREN_L > fl = FormalList() < PAREN_R > < BRACE_L >
+  {VarDeclListMod(vdl,sl);}
+  < RETURN > e = Exp() < SEMICOLON > < BRACE_R >
+  { return new TMethodDecl(ty, new TIdentifier(id1.image), fl, vdl, sl, e);}}
+
+void VarDeclListMod(TVarDeclList vdl, TStatementList sl):
+{Token id1; Token id2; TExp e2; TExp e3; TVarDecl vd; TStatement s;}
+{  < INT >
+    (< BRACKET_L > < BRACKET_R > id1 = < ID > < SEMICOLON >
+      {vd = new TVarDecl(new TTypeIntegerArray(), new TIdentifier(id1.image));
+       vdl.addElement(vd);
+       VarDeclListMod(vdl, sl);} |
+    id1 = < ID > < SEMICOLON >
+      {vd = new TVarDecl(new TTypeInteger(), new TIdentifier(id1.image));
+       vdl.addElement(vd);
+       VarDeclListMod(vdl, sl);} ) |
+      
+  < BOOLEAN > id1 = < ID > < SEMICOLON >
+    {vd = new TVarDecl(new TTypeBoolean(), new TIdentifier(id1.image));
+     vdl.addElement(vd);
+     VarDeclListMod(vdl, sl);} |
+      
+  id1 = < ID >
+    (id2 = < ID > < SEMICOLON >
+      {vd = new TVarDecl(new TTypeIdentifier(id1.image), new TIdentifier(id2.image));
+       vdl.addElement(vd);
+       VarDeclListMod(vdl, sl);} |
+    < BRACKET_L > e2 = Exp() < BRACKET_R > < ASSIGN > e3 = Exp() < SEMICOLON >
+      {s = new TStatementArrayAssign(new TIdentifier(id1.image),e2,e3);}      sl = StatementList()
+      {sl.addElement(s);} |
+    < ASSIGN > e2 = Exp() < SEMICOLON >
+      {s = new TStatementAssign(new TIdentifier(id1.image),e2);}
+      sl = StatementList()
+      {sl.addElement(s);} ) |
+  {} sl = StatementList()
+}
+
+TFormal Formal():
+{TType ty; Token id1;}
+{
+  ty = Type() id1 = < ID >
+  {return new TFormal(ty, new TIdentifier(id1.image));}     
+}
+
+TFormalList FormalList():
+{TFormal f; TFormalList fl;}
+{
+  f = Formal() fl = FormalRest()
+  { fl.addElement(f);
+    return fl;}
+  | {} {return new TFormalList();}
+}
+
+TFormalList FormalRest():
+{TFormal f; TFormalList fl;}
+{
+  < COMMA > f = Formal() fl = FormalRest()
+  { fl.addElement(f);
+    return fl;}
+  | {} {return new TFormalList();}   
+}
+
+TStatementList StatementList():
+{TStatement s; TStatementList sl;}
+{
+	  s = Statement() sl = StatementList()
+	  {	    sl.addElement(s);
+	    return sl;
+	  }
+	  | {	}
+	  {return new TStatementList();}	
+}
+
+TStatement Statement():
+{int i=0; TStatementList sl; TExp e1; TExp e2; TStatement s1; TStatement s2; Token id1;}
+{
+  < IF > < PAREN_L > e1 = Exp() < PAREN_R > s1 = Statement() < ELSE > s2 = Statement()
+    {return new TStatementIf(e1,s1,s2);} |
+  < WHILE > < PAREN_L > e1 = Exp() < PAREN_R > s1 = Statement()
+    {return new TStatementWhile(e1,s1);} |
+  < SOP > < PAREN_L > e1 = Exp() < PAREN_R > < SEMICOLON >
+    {return new TStatementPrint(e1);} |
+  id1 = < ID >
+    (< BRACKET_L > e1 = Exp() < BRACKET_R > < ASSIGN > e2 = Exp() < SEMICOLON >
+      {return new TStatementArrayAssign(new TIdentifier(id1.image),e1,e2);} |
+    < ASSIGN > e2 = Exp() < SEMICOLON >
+      {return new TStatementAssign(new TIdentifier(id1.image),e2);}) |
+    < BRACE_L > sl = StatementList() < BRACE_R >
+      {return new TStatementBlock(sl);}
+}
+
+TExpList ExpList():
+{TExp e; TExpList el;}
+{
+	  e = Exp() el = ExpRest()
+	  { el.addElement(e);
+	    return el;}
+	  | {} {return new TExpList();}
+	}
+
+TExpList ExpRest():
+{TExp e; TExpList el;}
+{
+	  < COMMA > e = Exp() el = ExpRest()
+  { el.addElement(e);
+	    return el;}
+	   | {} {return new TExpList();}
+}
+	
+TExp Exp():
+{Token id1; TExp e1; TExp e2;}
+{
+		   (id1 = < NUM	 >
+     {e1 = new TExpIntegerLiteral(Integer.parseInt(id1.image));} |        
+		   < TRUE >
+		     {e1 = new TExpTrue();} |      
+		   < FALSE >
+		     {e1 = new TExpFalse();} |
+		   id1 = < ID >
+		     {e1 = new TExpId(id1.image);} |  
+		   < THIS >
+		     {e1 = new TExpThis();} |
+		   < NEW >
+     ( < INT > < BRACKET_L > e2 = Exp() < BRACKET_R >
+         { e1 = new TExpNewArray(e2);} |
+       id1 = < ID > < PAREN_L > < PAREN_R >
+         {e1 = new TExpNewObject(new TIdentifier(id1.image));} ) |     
+   < EXCL > e2 = Exp()
+     {e1 = new TExpNot(e2);} |
+   < PAREN_L > e1 = Exp() < PAREN_R > )
+   
+   { return ExpAux(e1); }
+     
+}
+
+TExp ExpAux(TExp e1):
+{Token id2; TExp e2; TExpList el;}
+{
+	  ( < SUM  > e2 = Exp() { return new TExpOpPlus (e1,e2); } |
+		    < SUB > e2 = Exp() { return new TExpOpMinus (e1,e2); } |
+		    < MULTI > e2 = Exp() { return new TExpOpTimes (e1,e2); } |
+		    < AND > e2 = Exp() { return new TExpOpAnd (e1,e2); } |
+		    < LESSTHAN > e2 = Exp() { return new TExpOpLessThan (e1,e2); } ) |
+		
+  < BRACKET_L > e2 = Exp() < BRACKET_R >
+    { return new TExpArrayLookup(e1,e2);} |
+        
+  < DOT >
+    ( < LENGTH >
+      { return new TExpArrayLength(e1);} |
+    id2 = < ID > < PAREN_L> el = ExpList() < PAREN_R >)
+      { return new TExpCall(e1, new TIdentifier(id2.image),el); } |
+
+  {}
+    { return e1; }
+}
