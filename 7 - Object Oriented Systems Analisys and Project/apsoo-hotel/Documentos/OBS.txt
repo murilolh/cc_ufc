@@ -1,0 +1,41 @@
+Temos que definir os casos de uso que serão implementados na primeira iteração e fazer:
+	Fluxo de dados
+	Casos de teste
+	Projetar as telas		<- temos que definir logo as telas a serem feitas
+	Implementar
+	Fazer diagramas de sequência
+
+	
+Murilo, eu estive pensando, por enquanto é 
+melhor não mexermos na especificação (artefatos da fase exploratória
+
+
+Fazendo um mapeamento dos casos de usos necessários (Colaboração) 
+
+Reserva efetuada pelo recepcionista via rede local 
+- Efetuar Login
+- Mantem Usuário
+- Mantem cliente
+- Mantem Apartamento
+- Mantem Tipo de Apartamento (opcional - axo que melhor implementar)
+- Faz Reserva (aqui serão instanciados hóspede e conta, é isso? - como discutido serão instanciados hóspede e reserva)
+
+Registro de hóspede (check-in)
+- Faz Check-in
+
+Manutenção da tabela de serviços
+- Mantem serviço
+
+
+Como discutimos, vamos especificar cada caso de uso com seus fluxos de eventos, principal e alternativos, e casos de teste. Fazer isso o mais rápido possível.
+Após isso, implementar cada caso de uso.
+O projeto de telas que o araujo quer podem ser prints do layout das telas já na aplicação.
+Axo que quando formos implementar as telas, não devemos nos preocupar com lay-out, deixando isso pras outras iterações
+
+Vamos criar uma nova tabela pra guardar os dados do hotel que está usando o sistema.
+Ao especificar o fluxo de eventos a gente pode ser um pouco mais preciso, especificando tb o fluxo de telas do caso de uso em questão
+
+Em caso de mudança em casos de uso, classes ou modelos de dados, devemos fazer logo as alterações no Jude/DBDesigner não é?
+
+Podemos criar um google code, e versionar tb os diagramas e documentos, criando um diretório principal, e um pra cada um de nós, pra que façamos alterações
+sem se preocupar em desfazer alguma alteração do outro.

@@ -1,0 +1,42 @@
+Esse documento serve mais pra gente entender e registrar o papel de cada caso de uso
+
+A ordem das setas dos extends estava errada :X
+
+Cliente:
+	- Cadastra Cliente: Na tela de logon o cliente pode ser redirecionado para uma tela de cadastro.
+	- Efetua Login Cliente: Um cliente cadastrado entra com login e senha para acessar o sistema.
+	- Consulta Conta: Consulta as contas do clientes, ativas e inativas, exibindo dados sobre as contas e permitindo a consulta das desepesas.
+	- Consulta Despesa: Caso de uso secundário; ao consultar contas existe a consulta das despesas.
+	- Altera Cliente: o Cliente pode alterar seus dados cadastrais.
+	- Consulta Reserva: O Cliente pode consultar as suas reservas.
+	- Finaliza Reserva: Caso de uso secundário; o cliente pode finalizar reservas feitas.
+	- Faz Reserva: Efetua reservas, consultando os apartamentos para isto; Acho que não é necessário consultar reservas para fazer uma.
+	  (Retirei o include para consultar apartamento, pois não vai ser o mesmo caso de uso(fluxo). A idéia do include serve mais pra isolar fluxos comuns,
+	   como o efetuar login.)
+	- Consulta Apartamento: O Cliente pode consultar o status dos apartamentos.
+
+(Axo que a palavar Usuário não é a mais adequada pra indicar o funcionário do hotel que vai ser o ator)
+Funcionário:
+	- Efetua Login Funcionário: Um funcionário cadastrado entra com login e senha para acessar o sistema.
+	- Consulta Conta Cliente: O usuário entra com os dados do cliente e consulta informações sobre sua(s) contas(s), permitindo a consulta das desepesas.
+	- Consulta Despesa: Mesmo do UC do cliente.
+	- Estorna Despesa: O funcionário pode estornar uma despesa relacionada a um serviço de uma conta do cliente
+	- Lança Despesa: O funcionário pode lançar uma despesa relacionada a um serviço para uma conta do cliente.
+	- Faz Check-out: O funcionário faz check-out do cliente, lançando a despesa da estadia e consultando a conta do cliente.
+	- Consulta Reserva: O funcionário pode consultar as reservas de um cliente.
+	- Finaliza Reserva: Caso de uso secundário; o funcionário pode finalizar reservas feitas pelos clientes.
+	- Faz Reserva: Mesmo do UC do cliente.
+	(Mesma alteração do UC do Cliente)
+	- Faz Check-in: O funcionário faz check-in de um cliente, consultando ou cadastrando um cliente e registrando(cadastrando) os hóspedes.
+	- Mantém Cliente: Crud da tabela Cliente.
+	- Mantém Apartamento: Crud da tabela Apartamento.
+	- Mantém TipoApartamento: Crud da tabela TipoApartamento.
+	- Mantém Serviço: Crud da tabela Serviço.
+	- Mantém Funcionário: Crud da tabela Funcionário.
+	- Efetuar Consultas Gerenciais: O funcionário pode efetuar consultas gerenciais.	
+
+* Existem regras de negócio como nunca deletar clientes, contas e reservas; deletar apartamentos apenas quando não estão em uso; etc.; que serão definidas
+  em etapas futuras.
+
+
+	

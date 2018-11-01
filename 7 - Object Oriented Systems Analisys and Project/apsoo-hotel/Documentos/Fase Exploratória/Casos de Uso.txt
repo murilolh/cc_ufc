@@ -1,0 +1,36 @@
+Esse documento serve mais pra gente entender e registrar o papel de cada caso de uso
+
+Cliente:
+	- Cadastra Cliente: Na tela de logon o cliente pode ser redirecionado para uma tela de cadastro.
+	- Efetua Login Cliente: Um cliente cadastrado entra com login e senha para acessar o sistema.
+	- Consulta Conta: Consulta as contas do clientes, ativas e inativas, exibindo dados sobre as contas e permitindo a consulta das desepesas.
+	- Consulta Despesa: Caso de uso secundário; ao consultar contas existe a consulta das despesas.
+	- Altera Cliente: o Cliente pode alterar seus dados cadastrais.
+	- Consulta Reserva: O Cliente pode consultar as suas reservas.
+	- Finaliza Reserva: Caso de uso secundário; o cliente pode finalizar reservas feitas.
+	- Faz Reserva: Efetua reservas, consultando os apartamentos para isto; Acho que não é necessário consultar reservas para fazer uma.
+	- Consulta Apartamento: O Cliente pode consultar o status dos apartamentos.
+
+(Axo que a palavar Usuário não é a mais adequada pra indicar o funcionário do hotel que vai ser o ator)
+Usuário:
+	- Efetua Login Usuário: Um usuário cadastrado entra com login e senha para acessar o sistema.
+	- Faz Check-in: O usuário faz check-in de um cliente, consultando ou cadastrando um cliente e registrando(cadastrando) os hóspedes.
+	- Faz Check-out: O Usuário faz check-out do cliente, lançando a despesa da estadia e consultando a conta do cliente.
+	- Consulta Conta Cliente: O usuário entra com os dados do cliente e consulta informações sobre sua(s) contas(s), permitindo a consulta das desepesas.
+	- Consulta Despesa: Mesmo do UC do cliente.
+	- Lança Despesa: O usuário pode lançar uma despesa relacionada a um serviço para uma conta do cliente.
+	- Estorna Despesa: O usuário pode estornar uma despesa relacionada a um serviço de uma conta do cliente
+	- Faz Reserva: Mesmo do UC do cliente.
+	- Consulta Reserva: O usuario pode consultar as reservas de um cliente.
+	- Finaliza Reserva: Caso de uso secundário; o usuario pode finalizar reservas feitas pelos clientes.
+	- Mantém Apartamento: Crud da tabela Apartamento.
+	- Mantém TipoApartamento: Crud da tabela TipoApartamento.
+	- Mantém Serviço: Crud da tabela Serviço.
+	- Mantém Usuário: Crud da tabela Usuário.
+	- Mantém Cliente: Crud da tabela Cliente.
+
+* Existem regras de negócio como nunca deletar clientes, contas e reservas; deletar apartamentos apenas quando não estão em uso; etc.; que serão definidas
+  em etapas futuras.
+
+
+	

@@ -1,0 +1,70 @@
+﻿.mainTable
+{
+	table-layout: fixed;
+}
+
+.column_left
+{
+	float: left;
+}
+
+.column_right
+{
+	float: right;
+}
+
+#file_evaluation
+{
+	border-style: solid;
+	border-width: thin;
+	color: #000000;
+}
+#quality_checkers
+{
+	/*text-align:center;*/
+	color: #000000;
+}
+.qc_item_odd
+{
+	font-size: 10px;
+	background-color: #EEEEEE;
+	text-align: left;
+	vertical-align: middle;
+}
+.qc_item_even
+{
+	font-size: 10px;
+	background-color: #DDDDDD;
+	text-align: left;
+}
+.qc_title
+{
+	font-size: 16px;
+}
+
+.qc_status_off 
+{
+	color: #CCCCCC;
+	vertical-align: middle;
+	text-align: center;
+	width: 50px;
+}
+.qc_status_on
+{
+	font-weight: bold;
+	vertical-align: middle;
+	text-align: center;
+	width: 50px;
+}
+
+#general_comments
+{
+	font-size: 16px;
+	color: #000000;
+	width: 100%;
+}
+td
+{
+	vertical-align: top;
+}
+

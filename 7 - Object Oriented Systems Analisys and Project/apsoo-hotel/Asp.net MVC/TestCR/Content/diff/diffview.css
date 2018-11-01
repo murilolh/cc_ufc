@@ -1,0 +1,125 @@
+/***
+This is part of jsdifflib v1.0. <http://snowtide.com/jsdifflib>
+
+Copyright (c) 2007, Snowtide Informatics Systems, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+        * Redistributions of source code must retain the above copyright notice, this
+                list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright notice,
+                this list of conditions and the following disclaimer in the documentation
+                and/or other materials provided with the distribution.
+        * Neither the name of the Snowtide Informatics Systems nor the names of its
+                contributors may be used to endorse or promote products derived from this
+                software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGE.
+***/
+/* Author: Chas Emerick <cemerick@snowtide.com> */
+
+div #main
+{
+        position: relative;
+}
+
+pre
+{
+        font-size:medium;
+        color:#000000;
+        margin: 0;
+}
+
+div #diffoutput
+{
+        position:relative;
+}
+
+table.diff {
+        border-collapse:collapse;
+        border:1px solid darkgray;
+        table-layout:fixed;
+        position: absolute;             
+}
+
+table.diff th {
+        font-family:verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;
+        background:#EED;
+        font-size:11px;
+        font-weight:normal;
+        border:1px solid #BBC;
+        color:#886;
+        padding:2px 5px 2px 5px;
+        text-align:center;
+        vertical-align:middle; 
+}
+table.diff th.withComment_critical {
+        background-color:#FFBBBB;
+        color : #0000FF;
+        cursor:pointer;
+}
+table.diff th.withComment_warning {
+        background-color:#FFFFBB;
+        color : #0000FF;
+        cursor:pointer;
+}
+table.diff th.withComment_information {
+        background-color:#BBFFBB;
+        color : #0000FF;
+        cursor:pointer;
+}
+table.diff th.texttitle {
+        text-align:center;
+        border: 1px solid #BBC;
+        background:#EFEFEF;
+        font-family:Verdana;
+        font-size:medium;
+}
+
+table.diff th.linenumber
+{
+        vertical-align: middle;
+        text-align: center;
+}
+
+table.diff th.link
+{
+        color: #0000FF;
+        cursor: pointer;
+}
+
+table.diff td {
+        padding:0px .4em;
+        padding-top:.4em;
+        word-wrap:break-word;
+        border: solid 1px #e8eef4;
+        font-family:Courier, monospace
+}
+table.diff .empty {
+        background-color:#DDD;
+}
+table.diff .replace {
+        background-color:#FD8
+}
+table.diff .delete {
+        background-color:#E99;
+}
+table.diff .skip {
+        background-color:#EFEFEF;
+        border:1px solid #AAA;
+        border-right:1px solid #BBC;
+}
+table.diff .insert {
+        background-color:#FD8;/*Ticket #101: adição e edição devem ficar com a mesma cor (antiga cor #9E9)*/
+}

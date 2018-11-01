@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ericssonModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="6.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="ericssonModelStoreContainer">
+          <EntitySet Name="category" EntityType="ericssonModel.Store.category" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="collectorspoint" EntityType="ericssonModel.Store.collectorspoint" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="curiosities" EntityType="ericssonModel.Store.curiosities" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="dirtypoint" EntityType="ericssonModel.Store.dirtypoint" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="pollution" EntityType="ericssonModel.Store.pollution" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="products" EntityType="ericssonModel.Store.products" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="user" EntityType="ericssonModel.Store.user" store:Type="Tables" Schema="ericsson" />
+          <EntitySet Name="userdirtypoint" EntityType="ericssonModel.Store.userdirtypoint" store:Type="Tables" store:Schema="ericsson" store:Name="userdirtypoint">
+            <DefiningQuery>SELECT
+      `userdirtypoint`.`dirtypoint`, 
+      `userdirtypoint`.`pointstoreceive`, 
+      `userdirtypoint`.`user`
+      FROM `userdirtypoint` AS `userdirtypoint`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="collectorspoint_fk" Association="ericssonModel.Store.collectorspoint_fk">
+            <End Role="user" EntitySet="user" />
+            <End Role="collectorspoint" EntitySet="collectorspoint" />
+          </AssociationSet>
+          <AssociationSet Name="curiosities_fk" Association="ericssonModel.Store.curiosities_fk">
+            <End Role="category" EntitySet="category" />
+            <End Role="curiosities" EntitySet="curiosities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="collectorspoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="coordX" Type="double" Nullable="false" />
+          <Property Name="coordY" Type="double" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="isValidate" Type="double" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="curiosities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="category" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="dirtypoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="coordx" Type="double" Nullable="false" />
+          <Property Name="coordy" Type="double" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="pollution" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pollution">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="degrationTime" Type="double" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="photo" Type="blob" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="photo" Type="blob" />
+          <Property Name="points" Type="double" Nullable="false" />
+          <Property Name="reputation" Type="double" Nullable="false" />
+          <Property Name="whoami" Type="text" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'def.ericsson.userdirtypoint' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="userdirtypoint">
+          <Key>
+            <PropertyRef Name="dirtypoint" />
+            <PropertyRef Name="pointstoreceive" />
+            <PropertyRef Name="user" />
+          </Key>
+          <Property Name="dirtypoint" Type="int" Nullable="false" />
+          <Property Name="pointstoreceive" Type="double" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="collectorspoint_fk">
+          <End Role="user" Type="ericssonModel.Store.user" Multiplicity="1" />
+          <End Role="collectorspoint" Type="ericssonModel.Store.collectorspoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="collectorspoint">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="curiosities_fk">
+          <End Role="category" Type="ericssonModel.Store.category" Multiplicity="1" />
+          <End Role="curiosities" Type="ericssonModel.Store.curiosities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="curiosities">
+              <PropertyRef Name="category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ericssonModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="ericssonEntities">
+          <EntitySet Name="category" EntityType="ericssonModel.category" />
+          <EntitySet Name="collectorspoint" EntityType="ericssonModel.collectorspoint" />
+          <EntitySet Name="curiosities" EntityType="ericssonModel.curiosities" />
+          <EntitySet Name="dirtypoint" EntityType="ericssonModel.dirtypoint" />
+          <EntitySet Name="pollution" EntityType="ericssonModel.pollution" />
+          <EntitySet Name="products" EntityType="ericssonModel.products" />
+          <EntitySet Name="user" EntityType="ericssonModel.user" />
+          <EntitySet Name="userdirtypoint" EntityType="ericssonModel.userdirtypoint" />
+          <AssociationSet Name="curiosities_fk" Association="ericssonModel.curiosities_fk">
+            <End Role="category" EntitySet="category" />
+            <End Role="curiosities" EntitySet="curiosities" />
+          </AssociationSet>
+          <AssociationSet Name="collectorspoint_fk" Association="ericssonModel.collectorspoint_fk">
+            <End Role="user" EntitySet="user" />
+            <End Role="collectorspoint" EntitySet="collectorspoint" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" />
+          <NavigationProperty Name="curiosities" Relationship="ericssonModel.curiosities_fk" FromRole="category" ToRole="curiosities" />
+        </EntityType>
+        <EntityType Name="collectorspoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="coordX" Type="Double" Nullable="false" />
+          <Property Name="coordY" Type="Double" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="isValidate" Type="Double" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="ericssonModel.collectorspoint_fk" FromRole="collectorspoint" ToRole="user" />
+        </EntityType>
+        <EntityType Name="curiosities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" />
+          <NavigationProperty Name="category" Relationship="ericssonModel.curiosities_fk" FromRole="curiosities" ToRole="category" />
+        </EntityType>
+        <EntityType Name="dirtypoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="coordx" Type="Double" Nullable="false" />
+          <Property Name="coordy" Type="Double" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="pollution" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pollution">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="degrationTime" Type="Double" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="photo" Type="Binary" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <Property Name="photo" Type="Binary" />
+          <Property Name="points" Type="Double" Nullable="false" />
+          <Property Name="reputation" Type="Double" Nullable="false" />
+          <Property Name="whoami" Type="String" />
+          <NavigationProperty Name="collectorspoint" Relationship="ericssonModel.collectorspoint_fk" FromRole="user" ToRole="collectorspoint" />
+        </EntityType>
+        <EntityType Name="userdirtypoint">
+          <Key>
+            <PropertyRef Name="dirtypoint" />
+            <PropertyRef Name="pointstoreceive" />
+            <PropertyRef Name="user" />
+          </Key>
+          <Property Name="dirtypoint" Type="Int32" Nullable="false" />
+          <Property Name="pointstoreceive" Type="Double" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="curiosities_fk">
+          <End Role="category" Type="ericssonModel.category" Multiplicity="1" />
+          <End Role="curiosities" Type="ericssonModel.curiosities" Multiplicity="*" />
+        </Association>
+        <Association Name="collectorspoint_fk">
+          <End Role="user" Type="ericssonModel.user" Multiplicity="1" />
+          <End Role="collectorspoint" Type="ericssonModel.collectorspoint" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="ericssonModelStoreContainer" CdmEntityContainer="ericssonEntities">
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.category)">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="collectorspoint">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.collectorspoint)">
+              <MappingFragment StoreEntitySet="collectorspoint">
+                <ScalarProperty Name="coordX" ColumnName="coordX" />
+                <ScalarProperty Name="coordY" ColumnName="coordY" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="isValidate" ColumnName="isValidate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="curiosities">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.curiosities)">
+              <MappingFragment StoreEntitySet="curiosities">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dirtypoint">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.dirtypoint)">
+              <MappingFragment StoreEntitySet="dirtypoint">
+                <ScalarProperty Name="coordx" ColumnName="coordx" />
+                <ScalarProperty Name="coordy" ColumnName="coordy" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pollution" ColumnName="pollution" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pollution">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.pollution)">
+              <MappingFragment StoreEntitySet="pollution">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.products)">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="degrationTime" ColumnName="degrationTime" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.user)">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="reputation" ColumnName="reputation" />
+                <ScalarProperty Name="whoami" ColumnName="whoami" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userdirtypoint">
+            <EntityTypeMapping TypeName="IsTypeOf(ericssonModel.userdirtypoint)">
+              <MappingFragment StoreEntitySet="userdirtypoint">
+                <ScalarProperty Name="dirtypoint" ColumnName="dirtypoint" />
+                <ScalarProperty Name="pointstoreceive" ColumnName="pointstoreceive" />
+                <ScalarProperty Name="user" ColumnName="user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="curiosities_fk" TypeName="ericssonModel.curiosities_fk" StoreEntitySet="curiosities">
+            <EndProperty Name="category">
+              <ScalarProperty Name="id" ColumnName="category" />
+            </EndProperty>
+            <EndProperty Name="curiosities">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="collectorspoint_fk" TypeName="ericssonModel.collectorspoint_fk" StoreEntitySet="collectorspoint">
+            <EndProperty Name="user">
+              <ScalarProperty Name="id" ColumnName="user" />
+            </EndProperty>
+            <EndProperty Name="collectorspoint">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="TesteModel">
+        <EntityTypeShape EntityType="ericssonModel.category" Width="1.5" PointX="0.75" PointY="4.875" Height="1.5923063151041674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.collectorspoint" Width="1.5" PointX="3" PointY="1.25" Height="1.7566536458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.curiosities" Width="1.5" PointX="3" PointY="4.875" Height="1.5923063151041674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.dirtypoint" Width="1.5" PointX="5.75" PointY="0.75" Height="1.5923063151041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.pollution" Width="1.5" PointX="5.75" PointY="3.75" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.products" Width="1.5" PointX="5.75" PointY="6.75" Height="1.5923063151041674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.user" Width="1.5" PointX="0.75" PointY="1" Height="2.4140429687499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ericssonModel.userdirtypoint" Width="1.5" PointX="7.75" PointY="0.75" Height="1.4279589843749998" IsExpanded="true" />
+        <AssociationConnector Association="ericssonModel.curiosities_fk" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.6711531575520837" />
+          <ConnectorPoint PointX="3" PointY="5.6711531575520837" /></AssociationConnector>
+        <AssociationConnector Association="ericssonModel.collectorspoint_fk" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.1283268229166667" />
+          <ConnectorPoint PointX="3" PointY="2.1283268229166667" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

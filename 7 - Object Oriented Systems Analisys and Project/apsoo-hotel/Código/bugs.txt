@@ -1,0 +1,213 @@
+Novos bugs
+
+- consertar validação do cpf (ok)
+- colocar grid com as solicitações de reserva no checkin (ok, testar mais)
+- colocar opção de alterar status de solicitação para efetivado (ok)
+- hostear
+- criar UI para fazer reserva online
+- corrigir bugs de entradas de dados nos checks
+- criar eventos onclick em todas as alterações nas paginas
+- criar consultas gerenciais (ok)
+
+Autenticar login (opened)
+
+Colocar alterar ano na data, colocar datetime (done)
+Melhorar msg de saida (done)
+msg saida clientes (edit, ins, del) (done)
+
+consertar bug id (edit, ins, del) apartment  (testing)
+retestar funcionalidades apart (opened)
+tipo apartamento, colocar preço por hora (done) 
+melhorar data anotations na view (done)
+coloca $ no preço. (done)
+retirar Index  (done)
+
+Reservation
+
+desabilitar campo status. (done) 
+colocar campo com tipos (testing)
+listar apartamentos disponiveis pelo tipo (usando ajax/ opened)
+calcular valor da diaria pelo tipo do apartamento (opened)
+quantidade de dias (testing)
+retirar "back to list" (done)
+campos data consertar
+
+
+Checkin
+
+consultar reserva pelo cliente ou apartamento e data
+desabilitar status
+mudar date end
+salvar
+botao inserir despesa
+criar details tela para add despesas
+
+
+services
+retirar price ?
+colocar $ junto com o price (done)
+pode ter serviço com custo 0 (done)
+deixar o value inicial formatado "0,00"
+
+
+
+
+Novos bugs
+
+bug msg status delete(done)
+melhorar data anotations/Required em todas as views
+
+
+
+************************* Testes Murilo ****************************************
+
+0. Geral
+	- Fazer um script pra criação de uma base de dados inicial consistente 
+		- Aumentar o tamanho do campo nome da tabela Person no banco [Aumentado para 50]
+	- Telinha de calendário está com alguns problemas 
+		- Ao escolher uma data, não está mostrando a escolha, embora ela tenha sido salva no campo [ok-testar]
+		- Não é necessário Hora e Minuto em algumas telas(Data de nascimento) [ok-testar]
+	- Mostrar campo password protegido nas telas [ok, fazer confirmação de password com outro campo? :(] [É o q eh mais usado neh ;P]
+	- Implementar validação de CPF nas telas [ok-testar]
+	- Estabelecer um tamanho mínimo para a senhas [ok - tamanho 8]
+	- Nas telas onde há validação, padronizar se vai ser mostrada mensagem de erro tanto no topo da página
+	  quanto ao lado do campo, ou não. Há comportamentos diferentes em algumas telas. [muita coisa]
+	  (melhorar data anotations/Required em todas as views) 
+
+1. Entrada
+	- Sugestão: Abrir diretamente na tela de logon(Mostrando a home apenas depois do login) [Ok]
+
+2. Logon
+        - Logon é uma palavra só [Pois é, o sistema está em Inglês, então é separado.]
+
+3. Efetua Login Cliente - UC001
+	* Apenas na 3ª Iteração
+        - Sugestão: Remover o link para a página de cadastro(Register) nestas 2 iterações [Ok]
+
+4. Efetua Login Funcionário - UC002
+	- Entrei com um balconista e depois com um recepcionista. Foram mostrados os mesmos menus.          
+        - O balconista seria o funcionário q lança despesas. Se os níveis de funcionários forem
+          implementados, este nível deverá ter acesso apenas às telas de despesa. [tem que implementar o sistema de login completo e é mais complicado]
+
+5. Control
+	- Layout da tela	[alguma sugestão de layout?][Talvez colocar as opções como sub-menus da opção Control]
+
+6. Crud Funcionário - UC003 - Manage Employees
+	- Mensagem rápida 'Employee can't be added' está vindo com o nome junto ao added [ok]
+	- Mostrar mensagem alertando que um funcionário de msm login já está cadastrado, caso esteja, como está feito no login [ok]
+	- Mostrar mensagem alertando que o nome do funcionário é grande demais ou limitar o campo [setado no field maxlength = 50]
+	* Editar OK
+	* Remover OK
+	- Sugestão: Colocar o grid com paginação e a busca avançada q tem no cliente nessa tela tb [só seguir o template, mas chato de fazer (só depois)]
+
+7. Crud Cliente - UC004 - Clients
+	- Mostrar mensagem alertando que o nome do cliente é grande demais ou limitar o campo [setado no field maxlength = 50]
+	- Está inserindo com data em branco, acredito q n seja problema [deixei sem o required, por ser um dado opcional, sugestão: colocar asterisco nos campos obrigatórios]
+	- Está inserindo com senha em branco [idem anterior]
+	- Está inserindo com CPF em branco [idem anterior (no caso de hóspede, por exemplo)]
+	* Editar OK
+	* Remover OK
+	* Consultar OK	
+
+8. Crud Apartamento - UC005 - Apartments
+	* OK
+
+8. Crud Tipo Apartamento - UC006 - Apartments Type
+	- Acredito q seja melhor trabalhar com dias e n com horas [ok]
+
+9. Crud Serviços - UC009 - Services
+	- O preço está vindo com uma string 'R$ ..,00', que causa erro, pois o sistema n aceita o R$ [ok]
+	- Está aceitando preço zero [no caso de um serviço "grátis" da empresa, isso depende do negocio]
+	- Mostrar mensagem alertando que um serviço de mesmo nome já está cadastrado, caso esteja, como está feito no login [ok]
+
+10. Faz Reserva - UC007 - Reservation / Faz Check-in - UC008 - Check-in
+	- Retirar visibilidade dos campos Read-Only, axo q não é necessário mostrá-los  [ok]
+	- Fazer validação para mostrar apenas os apartamentos do andar selecionado [ok]
+	- Está mostrando número de apartamentos no combobox do andar  [ok]
+	- Tentei fazer algumas reservas e check-ins e, ao voltar para a listar de checks, mostrou a mensagem 'Can't add the check', mas não indicou o pq [ok]
+	- O cálculo da quantidade de dias n tah sendo feito, tah ficando zero. [ok]
+	* O valor é definido no check-out, então n tem pq mostrar o campo  [ok]
+	- No check-in mostrar os apartamentos livres no momento  [ok]
+	- Na reserva mostrar os apartamentos livres(sem reserva) dentro da range escolhida  [ok]
+	- Validar para que a data inicial seja sempre menor que a data final   [ok]
+	
+11. Lançar Despesa -
+
+12. Estornar Despesa - 
+
+13. Faz Check-out -
+
+----------------------------------------------------------------------------
+
+Testes 15/06/10:
+
+- Testei local
+- Para iniciar, dei um truncate nas tabelas check, client, employee e person. Após isso inseri um funcionario administrador(tipo 3).
+  Tavam ocorrendo alguns conflitos, como cliente e funcionario com o msm login, por isso preferi limpar td antes. Meu objetivo era ir testando
+  td.
+
+* Geral
+	- Quando um CPF está sendo trazido do banco e mostrado, a máscara do campo não está sendo aplicada
+	- Parece q o novo reservation gerou alguns efeitos colaterais. Ao clicar em reservation logado como um funcionário ele dá um erro na linha 
+          277 do checkController, onde tu retorna o numero de dias pelo diaria de um tipo de apartamento. Tava logado com um func Type 3.
+          Update: Esse erro acontece qdo n tem nenhum apartamento cadastrado.
+		  rafael: tratei isso colocando um if(apt == null) return 0... com tu falou, tem um return lá multiplicando por um valor nulo.)
+
+* Login
+	OK 	
+* Home
+	OK
+* Reservation(Funcionario)
+	- Tentei adicionar um cliente pelo Add New Client dessa View. Ocorreu erro no RedirectToAction, linha 262 do ClientController.
+	 rafael: Só dá erro no redirect se tiver dado erro na inserção do cliente. Coloquei pra checar null, mas foi estranho pq aqui funcionou. 
+	- Resto OK
+
+* Check-in
+	- Erro ao clicar nos Details de uma reserva. Erro na linha 70 do ExpenseRepository.cs 
+          List<Expense> list = context.CreateQuery<Expense>(EntitySetName).ToList();
+		  (rafael: Não consegui reproduzir)
+	- Check sem reserva OK
+	
+* Check-Out
+	- Msm erro do check-in
+	 (idem)
+
+* Control(Geral)
+	* Checks
+		- O link "Checks" pode ser retirado (A vantagem desse link é mostrar as contas canceladas e finalizadas. a idéia
+		é mostrar as reservas no checkin e as efetivadas no checkout, ficando mais fácil gerenciar.
+	* Clients
+		OK
+	* Services
+		OK
+	* Apartments
+		OK
+	* Apartment Types
+		OK
+
+* Control(Admin)
+	* Manage Employees
+		- O Edit do funcionário não está funcionando. Simplesmente submete a pagina e não faz nada.
+		- Tentei inserir um novo funcionário e não consegui. Tive q inserir na mao. Nao houve erro como no cliente.
+		(online tá funcionando, pode ser algum ponto crítico não tratado, tu acha interessante truncar o bd?)
+
+* Administration
+	* Occupancy rate
+		- Pendente (Resolvido Online!)
+	* Value Evolution	
+	 	- Pendente (Resolvido Online!)
+	* Search Apartment by Guest
+		- Pendente (Resolvido Online!)
+		- Ainda tem um bug e uma dúvida em relação à lógica (um hóspede pode estar em mais de um apartamento?)
+	* Best Services
+		- Pendente (Resolvido Online!)
+* Registrar Cliente
+	- Não consegui registrar um cliente. Bug em 'Linha 219: acc.ClientLogOn(cli.Login, true);'
+	(aqui ta funfando, vou ter que truncar o bd pra ver isso)
+
+* Reservation(Cliente)
+	OK (usando clientes cadastrados na mao)
+	
+	
+
+
